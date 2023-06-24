@@ -212,19 +212,21 @@ export default function NavBar() {
               color="inherit">
               {!isLoading && user && <Avatar alt={user.name} src={user.picture} />}
             </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none', flexGrow: 2 } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-              sx={{ margin: 'auto' }}>
-              <MoreIcon />
-            </IconButton>
-          </Box>
+          </Box>{' '}
+          {user && !isLoading && (
+            <Box sx={{ display: { xs: 'flex', md: 'none', flexGrow: 2 } }}>
+              <IconButton
+                size="large"
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+                sx={{ margin: 'auto' }}>
+                <MoreIcon />
+              </IconButton>
+            </Box>
+          )}
           <Button>
             {' '}
             {!isLoading && !user && (
