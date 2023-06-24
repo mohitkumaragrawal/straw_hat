@@ -5,12 +5,12 @@ import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
 import Highlight from '../components/Highlight';
-
+import { Box } from '@mui/material';
 function Profile() {
   const { user, isLoading } = useUser();
 
   return (
-    <>
+    <Box sx={{ mt: '10px' }}>
       {isLoading && <Loading />}
       {user && (
         <>
@@ -36,7 +36,7 @@ function Profile() {
           </Row>
         </>
       )}
-    </>
+    </Box>
   );
 }
 

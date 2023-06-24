@@ -164,20 +164,16 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 // import MenuButton from '@mui/material/Me/uButton';
 import Menu from '@mui/material/Menu';
-import { Nav } from 'reactstrap';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import AnchorLink from './AnchorLink';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { Avatar, Button } from '@mui/material';
+import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -185,17 +181,17 @@ const Search = styled('div')(({ theme }) => ({
   '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.25)
   },
-  marginRight: theme.spacing(2),
+  marginRight: theme.spacing(6),
   marginLeft: 0,
   width: '100%',
   [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
+    marginLeft: theme.spacing(2),
     width: 'auto'
   }
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
+  padding: theme.spacing(0, 1),
   height: '100%',
   position: 'absolute',
   pointerEvents: 'none',
@@ -207,13 +203,13 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
+    padding: theme.spacing(1, 1, 1, 5),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
-    width: '100%',
+    width: '140%',
     [theme.breakpoints.up('md')]: {
-      width: '20ch'
+      width: '80ch'
     }
   }
 }));
@@ -264,8 +260,15 @@ export default function NavBar() {
 
       <MenuItem href="/api/auth/logout" onClick={handleMenuClose}>
         <AnchorLink href="/api/auth/logout" className="btn btn-link p-0" icon="power-off" testId="navbar-logout-mobile">
-          Log out
+          Logout
         </AnchorLink>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Typography>
+          <AnchorLink href="/profile" className="btn btn-link " icon="user" testId="navbar-logout-mobile">
+            Profile
+          </AnchorLink>
+        </Typography>
       </MenuItem>
     </Menu>
   );
@@ -305,6 +308,14 @@ export default function NavBar() {
         </Typography>
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
+        <Typography>
+          <AnchorLink href="/profile" className="btn btn-link " icon="user" testId="navbar-logout-mobile">
+            Profile
+          </AnchorLink>
+        </Typography>
+      </MenuItem>
+
+      <MenuItem onClick={handleMenuClose}>
         {' '}
         <Button>
           {' '}
@@ -324,11 +335,11 @@ export default function NavBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="sticky" sx={{ backgroundColor: '#434343', height: '5rem' }}>
+      <AppBar position="sticky" sx={{ backgroundColor: '#333338', height: { lg: '6rem', sm: '5rem', md: '5rem' } }}>
         <Toolbar>
-          {/* <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
-            <MenuIcon />
-          </IconButton> */}
+          <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
+            <LocalMoviesIcon sx={{ color: '#C82333', width: '35px', height: '35px' }} />
+          </IconButton>
           <Typography variant="h6" noWrap component="div" sx={{ display: { xs: 'none', sm: 'block', flexGrow: '1' } }}>
             SHOWSTART
           </Typography>
@@ -338,7 +349,7 @@ export default function NavBar() {
             </SearchIconWrapper>
             <StyledInputBase placeholder="Search movies" inputProps={{ 'aria-label': 'search' }} />
           </Search>
-          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ flexGrow: 2 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
               size="large"
@@ -351,14 +362,15 @@ export default function NavBar() {
               {!isLoading && user && <Avatar alt={user.name} src={user.picture} />}
             </IconButton>
           </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ display: { xs: 'flex', md: 'none', flexGrow: 2 } }}>
             <IconButton
               size="large"
               aria-label="show more"
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
-              color="inherit">
+              color="inherit"
+              sx={{ margin: 'auto' }}>
               <MoreIcon />
             </IconButton>
           </Box>
@@ -367,7 +379,7 @@ export default function NavBar() {
             {!isLoading && !user && (
               <AnchorLink
                 href="/api/auth/login"
-                className="btn btn-primary btn-block"
+                className="btn btn-block btn-danger"
                 tabIndex={0}
                 testId="navbar-login-mobile">
                 Login
