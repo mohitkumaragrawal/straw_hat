@@ -13,7 +13,8 @@
     "test:integration": "start-server-and-test start http-get://localhost:3000 cypress:run",
     "test:integration:watch": "start-server-and-test start http-get://localhost:3000 cypress:open",
     "cypress:run": "cypress run",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^2.0.0",
