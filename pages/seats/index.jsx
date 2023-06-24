@@ -109,10 +109,12 @@ const SeatsPage = () => {
     }
     if (selectedSeats.length) {
       return (
-        <Link href={{ pathname: '/payment', query: { movieId: movie?.id, seatDetails: JSON.stringify(seatDetails) } }}>
+        // <Link href={{ pathname: '/payment', query: { movieId: movie?.id, seatDetails: JSON.stringify(seatDetails) } }}>
+        <Link href="/payment">
           <div className={styles.paymentButtonContainer}>
             <Button variant="contained" href="#contained-buttons" className={styles.paymentButton}>
-              Pay Rs.{selectedSeats.length * (movie?.ticketCost || 0)}
+              {/* Pay Rs.{selectedSeats.length * (movie?.ticketCost || 0)} */}
+              Pay Rs.{selectedSeats.length * (200 || 0)}
             </Button>
           </div>
         </Link>
@@ -131,7 +133,7 @@ const SeatsPage = () => {
       <div className={styles.seatsContainer}>
         <h1>Good Film</h1>
         {seatDetails && <RenderSeats />}
-        {/* <RenderPaymentButton /> */}
+        <RenderPaymentButton />
       </div>
     </>
   );
