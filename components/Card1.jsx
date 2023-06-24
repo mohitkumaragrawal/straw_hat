@@ -1,5 +1,4 @@
 import React from 'react';
-import { Box } from '@mui/material';
 import { Card } from '@mui/material';
 import { CardMedia } from '@mui/material';
 import { CardContent } from '@mui/material';
@@ -7,7 +6,7 @@ import { Typography } from '@mui/material';
 import { Button } from 'reactstrap';
 
 const img = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdH6-Tul_S6LVW0jsuQoND4lPX1DnldEXheQ&usqp=CAU';
-const Card1 = () => {
+const Card1 = props => {
   return (
     <div>
       {' '}
@@ -31,13 +30,13 @@ const Card1 = () => {
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              MovieName
+              {props.MovieName}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Casts:
+              {props.Casts}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Rating
+              {props.Rating}
             </Typography>
           </CardContent>
         </Card>

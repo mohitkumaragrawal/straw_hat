@@ -5,8 +5,6 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
-import YouTubeIcon from '@mui/icons-material/YouTube';
-
 const Footer = () => (
   <footer className="bg-light p-3 text-center" data-testid="footer">
     <hr />
