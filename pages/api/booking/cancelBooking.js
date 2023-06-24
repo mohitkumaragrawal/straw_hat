@@ -10,7 +10,7 @@ export default async function cancelBooking(req, res) {
     try {
       const prisma = new PrismaClient();
       const { id } = cancelBookingSchema.parse(req.body);
-      const booking = await prisma.booking.delete({
+      const booking = await prisma.UserBooking.delete({
         where: {
           id
         }
