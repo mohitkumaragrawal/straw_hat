@@ -286,7 +286,7 @@ export default function NavBar() {
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem>
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -295,7 +295,14 @@ export default function NavBar() {
           color="inherit">
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <Typography>Profile</Typography>
+      </MenuItem>
+      <MenuItem href="/api/auth/logout" onClick={handleMenuClose}>
+        <Typography>
+          <AnchorLink href="/api/auth/logout" className="btn btn-link " icon="power-off" testId="navbar-logout-mobile">
+            Logout
+          </AnchorLink>
+        </Typography>
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
         {' '}

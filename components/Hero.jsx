@@ -15,7 +15,7 @@ const Hero = () => (
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6} md={3} lg={3}>
           <Card sx={{ maxWidth: 345 }}>
-            <CardMedia component="img" height="140" image="/static/images/cards/contemplative-reptile.jpg" />
+            <CardMedia component="img" height="200" image="/static/images/cards/contemplative-reptile.jpg" />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 MovieName
@@ -33,7 +33,7 @@ const Hero = () => (
 
         <Grid item xs={12} sm={6} md={3} lg={3}>
           <Card sx={{ maxWidth: 345 }}>
-            <CardMedia component="img" height="140" image="/static/images/cards/contemplative-reptile.jpg" />
+            <CardMedia component="img" height="200" image="/static/images/cards/contemplative-reptile.jpg" />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 MovieName
@@ -51,7 +51,7 @@ const Hero = () => (
 
         <Grid item xs={12} sm={6} md={3} lg={3}>
           <Card sx={{ maxWidth: 345 }}>
-            <CardMedia component="img" height="140" image="/static/images/cards/contemplative-reptile.jpg" />
+            <CardMedia component="img" height="200" image="/static/images/cards/contemplative-reptile.jpg" />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 MovieName
@@ -69,7 +69,7 @@ const Hero = () => (
 
         <Grid item xs={12} sm={6} md={3} lg={3}>
           <Card sx={{ maxWidth: 345 }}>
-            <CardMedia component="img" height="140" image="/static/images/cards/contemplative-reptile.jpg" />
+            <CardMedia component="img" height="200" image="/static/images/cards/contemplative-reptile.jpg" />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 MovieName
@@ -87,7 +87,7 @@ const Hero = () => (
 
         <Grid item xs={12} sm={6} md={3} lg={3}>
           <Card sx={{ maxWidth: 345 }}>
-            <CardMedia component="img" height="140" image="/static/images/cards/contemplative-reptile.jpg" />
+            <CardMedia component="img" height="200" image="/static/images/cards/contemplative-reptile.jpg" />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 MovieName

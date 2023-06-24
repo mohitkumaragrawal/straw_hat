@@ -10,7 +10,7 @@ const Content = () => (
       What can I do next?
     </h2>
     <Row className="d-flex justify-content-between" data-testid="content-items">
-      {contentData.map((col, i) => (
+      {/* {contentData.map((col, i) => (
         <Col key={i} md={5} className="mb-4">
           <h6 className="mb-3">
             <a href={col.link}>
@@ -20,7 +20,7 @@ const Content = () => (
           </h6>
           <p>{col.description}</p>
         </Col>
-      ))}
+      ))} */}
     </Row>
   </div>
 );
