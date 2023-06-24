@@ -131,7 +131,7 @@ const SeatsPage = () => {
       <div className={styles.seatsContainer}>
         <h1>Good Film</h1>
         {seatDetails && <RenderSeats />}
-        <RenderPaymentButton />
+        {/* <RenderPaymentButton /> */}
       </div>
     </>
   );
