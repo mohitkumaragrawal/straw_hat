@@ -15,6 +15,7 @@ const SeatsPage = () => {
   //   const { id, seats } = router.query;
   //   const movie = movies.find(mov => mov.id === parseInt(id));
   //   const [seatDetails, setSeatDetails] = useState(movie?.seats || {});
+  const [movieId,setMovieId]=useState()
   const [seatDetails, setSeatDetails] = useState({
     A: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     B: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -30,6 +31,10 @@ const SeatsPage = () => {
   //       clearSelectedSeats();
   //     }
   //   }, []);
+  useEffect(()=>{
+    const movie=localStorage.getItem('movieId')
+    setMovieId(movie)
+  },[])
 
   const clearSelectedSeats = () => {
     let newMovieSeatDetails = { ...seatDetails };
@@ -44,6 +49,7 @@ const SeatsPage = () => {
   };
 
   const onSeatClick = (seatValue, rowIndex, key) => {
+    console.log(seatValue,rowIndex,key)
     if (seatDetails) {
       if (seatValue === 1 || seatValue === 3) {
         return;
@@ -108,6 +114,10 @@ const SeatsPage = () => {
       });
     }
     if (selectedSeats.length) {
+      //console.log(seatDetails)
+      //console.log((selectedSeats.length*200).toString())
+    localStorage.setItem('cost',(selectedSeats.length*200).toString())
+    localStorage.setItem('seats',seatDetails)
       return (
         // <Link href={{ pathname: '/payment', query: { movieId: movie?.id, seatDetails: JSON.stringify(seatDetails) } }}>
         <Link href="/payment">
@@ -124,14 +134,17 @@ const SeatsPage = () => {
     }
   };
 
+  
+
   //   if (!movie) return <div>loading...</div>;
+  
   return (
     <>
       <Head>
         <title>Seats</title>
       </Head>
       <div className={styles.seatsContainer}>
-        <h1>Good Film</h1>
+        <h1>{movieId}</h1>
         {seatDetails && <RenderSeats />}
         <RenderPaymentButton />
       </div>

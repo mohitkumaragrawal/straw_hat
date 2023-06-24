@@ -22,6 +22,8 @@ const Tickets = () => {
 
   //   const { movieId, seatDetails } = router.query;
   //   const movie = movies.find(mov => mov.id === parseInt(movieId));
+  const [movieId,setMovieId]=useState()
+  const [cost,setCost]=useState()
   const [seatDetails, setSeatDetails] = useState({
     A: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     B: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -37,12 +39,21 @@ const Tickets = () => {
   }
 
   useEffect(() => {
+    const movieId=localStorage.getItem('movieId')
+    console.log(movieId)
+    setMovieId(movieId)
+    const cost=localStorage.getItem('cost')
+    console.log(cost)
+    setCost(cost)
+    /*const seats=localStorage.getItem('seats')
+    console.log(seats)
+    setSeatDetails(seats)*/
     if (seconds > 0) {
       setTimeout(() => setSeconds(seconds - 1), 1000);
     } else {
       setIsTimerCompleted(true);
     }
-  });
+  },[]);
 
   const computeSelectedSeats = () => {
     let selectedSeats = [];
@@ -74,7 +85,7 @@ const Tickets = () => {
     return (
       <div className={styles.seatDetailsContainer}>
         <div className={styles.seatDetails}>Booking Charge</div>
-        <div className={styles.seatCost}>Rs.{bookingFee}</div>
+        <div className={styles.seatCost}>Rs.{cost}</div>
       </div>
     );
   };
@@ -84,7 +95,7 @@ const Tickets = () => {
     return (
       <div className={styles.seatDetailsContainer}>
         <div className={styles.seatDetails}>Total</div>
-        <div className={styles.seatCost}>Rs.{totalCost}</div>
+        <div className={styles.seatCost}>Rs.{cost}</div>
       </div>
     );
   };
@@ -128,6 +139,7 @@ const Tickets = () => {
   };
 
   const RenderCard = () => {
+    
     let selectedSeats = computeSelectedSeats();
     // let selectedSeats = 10;
 
@@ -146,8 +158,8 @@ const Tickets = () => {
           <div className={styles.cardTitle}>BOOKING SUMMARY</div>
         </div>
         {/* <p className={styles.movieName}>{movie.name}</p> */}
-        <p className={styles.movieName}>Good Film</p>
-        <RenderSeatDetails selectedSeats={selectedSeats} />
+        <p className={styles.movieName}>{movieId}</p>
+        {/*<RenderSeatDetails selectedSeats={selectedSeats} />*/}
         <RenderBookingCharge selectedSeats={selectedSeats} />
         <hr className={styles.hrStyle} />
         <RenderTotalCharge selectedSeats={selectedSeats} />

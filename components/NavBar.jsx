@@ -178,6 +178,9 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import AnchorLink from './AnchorLink';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { Avatar, Button } from '@mui/material';
+import { useState,useEffect } from 'react';
+
+
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -322,6 +325,12 @@ export default function NavBar() {
     </Menu>
   );
 
+  
+
+  function handleChange(searchTerm){
+    localStorage.setItem('searchTerm',searchTerm)
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="sticky" sx={{ backgroundColor: '#434343', height: '5rem' }}>
@@ -336,7 +345,7 @@ export default function NavBar() {
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase placeholder="Search movies" inputProps={{ 'aria-label': 'search' }} />
+            <StyledInputBase placeholder="Search movies" inputProps={{ 'aria-label': 'search' }} onChange={handleChange}/>
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
