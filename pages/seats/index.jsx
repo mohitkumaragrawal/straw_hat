@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -131,7 +131,7 @@ const SeatsPage = () => {
       <div className={styles.seatsContainer}>
         <h1>Good Film</h1>
         {seatDetails && <RenderSeats />}
-        {/* <RenderPaymentButton /> */}
+        <RenderPaymentButton />
       </div>
     </>
   );

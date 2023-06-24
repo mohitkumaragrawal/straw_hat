@@ -28,8 +28,8 @@ const Movie = props => {
   // const router = useRouter()
   // const { id } = router.query;
   //   const [movie, setMovie] = useState(state);
-  const [removeMovie, setRemoveMovie] = useState(false);
-  const [loading, setLoading] = useState(false);
+  //   const [removeMovie, setRemoveMovie] = useState(false);
+  //   const [loading, setLoading] = useState(false);
 
   //   useEffect(async () => {
   //     try {
@@ -148,51 +148,8 @@ const Movie = props => {
           </Link>
         </div>
       </div>
-      {/* <div className={styles.about}>
-        <h2>About Movie:</h2>
-        <div className={styles.main}>
-          <label htmlFor="stars" className={styles.label}>
-            stars:
-          </label>
-          <ul className={styles.ul}>
-            {movie.stars.map((stars, index) => (
-              <li key={index} className={styles.li}>
-                <span>{stars}</span>
-              </li>
-            ))}
-            <li className={styles.li}>Robert Downey Jr.</li>
-            <li className={styles.li}>Chris Evans</li>
-            <li className={styles.li}>Mark Ruffalo</li>
-          </ul>
-        </div>
-        <div className={styles.gall_main}>
-          <label htmlFor="trailer" className={styles.gall_label}>
-            trailer
-          </label>
-          <iframe
-            className={styles.tariler}
-            src={`https://www.youtube.com/embed/${movie.trailer}`}
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-            title="video"
-          />
-        </div>
-        <div className={styles.gall_main}>
-          <label htmlFor="image" className={styles.gall_label}>
-            Images
-          </label>
-          <div className={styles.car}>
-            <Carousels images={movie.images} />
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 };
-
-// export async function getServerSideProps({ params: { id } }) {
-//   return { props: { id } };
-// }
 
 export default Movie;
