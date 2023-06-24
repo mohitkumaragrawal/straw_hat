@@ -1,0 +1,262 @@
+.flex-grow-1.container {
+  padding: 0;
+}
+.container {
+  width: 100%;
+  height: 100%;
+  margin-top: 0;
+  /* position: absolute; */
+}
+
+#description {
+  /* margin-top: 1rem;
+    margin-bottom: 1rem; */
+  font-size: 3rem;
+  /* font-weight: 500;
+    color: #545454; */
+}
+
+.container .main_cont .poster_cont {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  /* padding: 0; */
+}
+
+.container .main_cont .poster_cont .poster {
+  width: 100%;
+  height: 91%;
+  object-fit: cover;
+}
+
+.container .main_cont .details {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.9) 25%, transparent 100%);
+  color: #ddd;
+  z-index: 1;
+  padding: 0;
+  height: 91%;
+  position: absolute;
+  display: flex;
+  /* align-items: center; */
+}
+
+.container .main_cont .details .info {
+  margin: 5rem;
+}
+
+.container .main_cont .details .info .title {
+  font-size: 1.2rem;
+}
+
+.container .main_cont .details .info .title .header .active {
+  margin-left: 1rem;
+  font-size: 0.9rem;
+}
+
+.container .main_cont .details .info .title .limit {
+  font-size: 0.7rem;
+  margin: 0;
+}
+
+.container .main_cont .details .info .desc {
+  width: 30%;
+  font-size: 0.5rem;
+  margin: 0.8rem 0;
+}
+
+.container .main_cont .details .info .desc .description {
+  opacity: 0.8;
+  font-weight: 200;
+}
+
+.container .main_cont .details .info .tag .ul {
+  list-style: none;
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+}
+
+.container .main_cont .details .info .tag .ul .li {
+  padding: 0.6rem 0.8rem;
+  margin: 0 1rem 0 0;
+  border-radius: 30px;
+  border: 1px solid #ddd;
+  font-size: 0.8rem;
+}
+
+.container .main_cont .details .info .main {
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  margin: 0.8rem 0;
+  width: 30%;
+  height: auto;
+}
+
+.container .main_cont .details .info .main .label {
+  color: #34bdeb;
+}
+
+.container .main_cont .details .info .main .ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+}
+
+.container .main_cont .details .info .main .ul .li {
+  margin-left: 0.5rem;
+}
+
+.container .main_cont .details .info .rating {
+  font-size: 0.6rem;
+  margin: 0.8rem 0;
+}
+
+.container .main_cont .details .info .duration .dur {
+  border: 1px groove grey;
+  padding: 0.7rem 1rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.container .main_cont .details .info .release .label {
+  font-size: 1rem;
+  margin-right: 0.6rem;
+}
+
+.container .main_cont .buttons {
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  color: #fff;
+  margin: 1rem 1rem 0 0;
+}
+
+.container .main_cont .buttons .update {
+  background: #f84464;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+}
+
+.container .main_cont .buttons .update:hover,
+.container .main_cont .buttons .update:focus {
+  background: #c4242b;
+  color: white;
+}
+
+.container .main_cont .buttons .delete {
+  margin: 0;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  font-size: 1rem;
+  color: #fff;
+  outline: none;
+  border: none;
+  background: #f84464;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+}
+
+.container .main_cont .buttons .delete:hover,
+.container .main_cont .buttons .delete:focus {
+  background: #c4242b;
+  color: white;
+}
+
+.container .main_cont .buttons .book {
+  margin: 0;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  outline: none;
+  border: none;
+  background: #f84464;
+  padding: 0.8rem 1.6rem;
+  border-radius: 30px;
+}
+
+.container .main_cont .buttons .book:hover,
+.container .main_cont .buttons .book:focus {
+  background: #c4242b;
+  color: white;
+}
+
+/* .container .about {
+  position: absolute;
+  margin-top: 45%;
+  height: 100%;
+  margin-left: 4rem;
+}
+
+.container .about .gall_main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: left;
+  height: 100%;
+  margin-top: 1rem;
+}
+
+.container .about .gall_main .gall_label {
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+  text-align: left;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.container .about .gall_main .tariler {
+  width: 95%;
+  height: 100%;
+}
+
+.container .about .gall_main .car {
+  width: 95%;
+  height: 100%;
+}
+
+.container .about .gall_main .car .car_cont_img {
+  height: 100%;
+}
+
+.container .about .gall_main .car .car_cont_img .car_img {
+  object-fit: cover;
+  height: 100%;
+}
+
+.container .about .main {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: left;
+}
+
+.container .about .main .label {
+  color: #34bdeb;
+  margin: 0.5rem 1rem 0 0;
+}
+
+.container .about .main .ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(7, auto);
+  grid-template-rows: repeat(auto-fill, 1fr);
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.container .about .main .ul .li {
+  padding: 0.6rem 0.8rem;
+  margin: 0 1rem 0 0;
+  border-radius: 30px;
+  border: 1px solid #ddd;
+  font-size: 0.8rem;
+  width: 100%;
+} */
