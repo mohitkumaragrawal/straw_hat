@@ -13,6 +13,8 @@ const baseUrl = process.env.AUTH0_BASE_URL;
 const issuerBaseUrl = process.env.AUTH0_ISSUER_BASE_URL;
 const audience = process.env.AUTH0_AUDIENCE;
 
+const reviewRouter = require('./pages/api/reviews_backend/reviewRouter');
+
 if (!baseUrl || !issuerBaseUrl) {
   throw new Error('Please make sure that the file .env.local is in place and populated');
 }
@@ -43,6 +45,8 @@ app.get('/api/shows', checkJwt, (req, res) => {
     msg: 'Your access token was successfully validated!'
   });
 });
+
+app.use('/api/review', reviewRouter);
 
 const server = app.listen(port, () => console.log(`API Server listening on port ${port}`));
 process.on('SIGINT', () => server.close());
