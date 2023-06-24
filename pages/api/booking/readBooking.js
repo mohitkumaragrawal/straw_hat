@@ -12,7 +12,7 @@ export default async function readBooking(req, res) {
 
       const { userId } = readBookingSchema.parse(req.body);
 
-      const booking = await prisma.booking.findMany({
+      const booking = await prisma.UserBooking.findMany({
         where: {
           userId
         }
