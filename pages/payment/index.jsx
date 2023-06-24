@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Button } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Link from 'next/link';
 
 // import { Movie, Seats } from '../../constants/models/Movies';
