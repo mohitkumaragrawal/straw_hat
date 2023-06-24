@@ -1,7 +1,7 @@
 export default async function (req, res) {
   const movieToSearch =
-    req.body.result && req.body.result.parameters && req.body.result.parameters.movie
-      ? req.body.result.parameters.movie
+    req.body.queryResult && req.body.queryResult.parameters && req.body.queryResult.parameters.movie
+      ? req.body.queryResult.parameters.movie
       : 'The Godfather';
 
   const API_KEY = process.env.OMDB_API_KEY;
