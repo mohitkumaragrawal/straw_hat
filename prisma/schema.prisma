@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+// model Booking {
+//   id        Int      @id @default(sequence())
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   userId  String
+//   movieId String
+// }
+
+model MovieReview {
+  id        Int      @id @default(sequence())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId  String
+  movieId String
+  rating  Int
+  review  String?
+}
+
+model Theater {
+  id        Int      @id @default(sequence())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name          String
+  address       String
+  city          String
+  state         String
+  zip           String
+  website       String?
+  row           Int
+  column        Int
+  TheaterReview TheaterReview[]
+}
+
+model TheaterReview {
+  id        Int      @id @default(sequence())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId    String
+  theater   Theater @relation(fields: [theaterId], references: [id])
+  rating    Int
+  review    String?
+  theaterId Int
+}
+
+model TheaterMovie {
+  id        Int    @id @default(sequence())
+  theaterId Int
+  movieId   String
+}
+
+model UserBooking {
+  id        Int      @id @default(sequence())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId    String
+  movieId   String
+  theaterId Int
+
+  row    Int
+  column Int
+}
