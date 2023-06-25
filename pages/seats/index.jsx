@@ -35,8 +35,9 @@ const SeatsPage = () => {
   //     }
   //   }, []);
   useEffect(() => {
-    const movie = localStorage.getItem('movieId');
-    setMovieId(movie);
+    console.log('use effect');
+    const movieId = router.query.movie;
+    setMovieId(movieId);
 
     const getAllTheaters = async () => {
       try {
@@ -174,7 +175,7 @@ const SeatsPage = () => {
       // console.log(JSON.parse(localStorage.getItem('seats')));
       return (
         // <Link href={{ pathname: '/payment', query: { movieId: movie?.id, seatDetails: JSON.stringify(seatDetails) } }}>
-        <Link href="/payment">
+        <Link href={`/payment?movie=${movieId}`}>
           <div className={styles.paymentButtonContainer}>
             <Button variant="contained" href="#contained-buttons" className={styles.paymentButton}>
               {/* Pay Rs.{selectedSeats.length * (movie?.ticketCost || 0)} */}

@@ -9,6 +9,7 @@ import Card1 from './Card1';
 
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const Hero = () => {
   const [movies, setMovies] = useState([]);
@@ -60,43 +61,44 @@ const Hero = () => {
           {/* {movies && movies.map(item => <Card1 MovieName={item.movieName} Rating={item.rating} />)} */}
           {movies &&
             movies.map((item, idx) => (
-              <Grid
-                item
-                key={idx}
-                sx={{
-                  width: '240px',
-                  height: '300px',
-                  margin: '10px',
-                  backgroundColor: 'rgba(0, 0, 0, 0.3)',
-                  position: 'relative',
-                  borderRadius: '10px',
-                  overflow: 'hidden',
-                  boxShadow: '0 0 5px rgba(0, 0,0,0.5)',
-                  cursor: 'pointer'
-                }}>
-                <Box
+              <Link href={`/movie?id=${item.show.id}`} key={idx}>
+                <Grid
+                  item
                   sx={{
-                    position: 'absolute',
-                    inset: '0',
-                    // zIndex: '-1',
-                    backgroundImage: extractImage(item),
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    opacity: 0.8,
+                    width: '240px',
+                    height: '300px',
+                    margin: '10px',
+                    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                    position: 'relative',
+                    borderRadius: '10px',
+                    overflow: 'hidden',
                     boxShadow: '0 0 5px rgba(0, 0,0,0.5)',
-                    transition: 'all .5s ease',
-                    ':hover': {
-                      opacity: 0.5
-                    }
-                  }}
-                />
+                    cursor: 'pointer'
+                  }}>
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      inset: '0',
+                      // zIndex: '-1',
+                      backgroundImage: extractImage(item),
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      opacity: 0.8,
+                      boxShadow: '0 0 5px rgba(0, 0,0,0.5)',
+                      transition: 'all .5s ease',
+                      ':hover': {
+                        opacity: 0.5
+                      }
+                    }}
+                  />
 
-                <Box sx={{ position: 'absolute', zIndex: '10000', color: 'white', bottom: 0 }}>
-                  <Typography variant="h5" sx={{ textShadow: '0 0 5px black' }}>
-                    {item.show.name}
-                  </Typography>
-                </Box>
-              </Grid>
+                  <Box sx={{ position: 'absolute', zIndex: '10000', color: 'white', bottom: 0 }}>
+                    <Typography variant="h5" sx={{ textShadow: '0 0 5px black' }}>
+                      {item.show.name}
+                    </Typography>
+                  </Box>
+                </Grid>
+              </Link>
             ))}
         </Grid>
       </Box>
