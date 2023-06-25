@@ -15,7 +15,9 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import AnchorLink from './AnchorLink';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { Avatar, Button } from '@mui/material';
+import { useRouter } from 'next/router';
 
+import { useState } from 'react';
 import authUser from '../auth-users.json';
 
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
@@ -189,9 +191,14 @@ export default function NavBar() {
     </Menu>
   );
 
-  function handleChange(searchTerm) {
-    localStorage.setItem('searchTerm', searchTerm);
-  }
+  const [searchTerm, setSearchTerm] = useState('');
+  const router = useRouter();
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    router.push(`/?q=${searchTerm}`);
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -203,16 +210,20 @@ export default function NavBar() {
           <Typography variant="h6" noWrap component="div" sx={{ display: { xs: 'none', sm: 'block', flexGrow: '1' } }}>
             SHOWSTART
           </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search movies"
-              inputProps={{ 'aria-label': 'search' }}
-              onChange={handleChange}
-            />
-          </Search>
+          <form onSubmit={handleSubmit}>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search movies"
+                inputProps={{ 'aria-label': 'search' }}
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
+                // onChange={handleChange}
+              />
+            </Search>
+          </form>
           <Box sx={{ flexGrow: 2 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
