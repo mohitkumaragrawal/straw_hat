@@ -34,8 +34,12 @@ const Tickets = () => {
   }
 
   useEffect(() => {
-    const movieId = localStorage.getItem('movieId');
-    console.log(movieId);
+    // const movieId = localStorage.getItem('movieId');
+    // console.log(movieId);
+    // setMovieId(movieId);
+
+    console.log('use effect');
+    const movieId = router.query.movie;
     setMovieId(movieId);
 
     const theaterId = localStorage.getItem('theaterId');
