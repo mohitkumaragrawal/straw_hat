@@ -1,28 +1,34 @@
-import React from 'react';
-import { Row, Col } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useEffect } from 'react';
+import { Box } from '@mui/material';
+import Example from './Carousel';
+import { useRouter } from 'next/router';
 
-import contentData from '../utils/contentData';
+const Content = () => {
+  const router = useRouter();
 
-const Content = () => (
-  <div className="next-steps my-5" data-testid="content">
-    <h2 className="my-5 text-center" data-testid="content-title">
-      What can I do next?
-    </h2>
-    <Row className="d-flex justify-content-between" data-testid="content-items">
-      {/* {contentData.map((col, i) => (
-        <Col key={i} md={5} className="mb-4">
-          <h6 className="mb-3">
-            <a href={col.link}>
-              <FontAwesomeIcon icon="link" className="mr-2" />
-              {col.title}
-            </a>
-          </h6>
-          <p>{col.description}</p>
-        </Col>
-      ))} */}
-    </Row>
-  </div>
-);
+  const searchTerm = router.query.q;
+  const isSearch = searchTerm ? true : false;
+
+  return (
+    <div className="next-steps my-5" data-testid="content" color="#2B3148">
+      {!isSearch && (
+        <h2 className="my-2 text-center" data-testid="content-title">
+          Premiere Movies
+        </h2>
+      )}
+      <hr />
+      <Box
+        sx={{
+          // marginLeft: { lg: '4rem', md: '2rem', sm: '1rem', xs: '1rem' },
+          // marginRight: { lg: '4rem', md: '2rem', sm: '1rem', xs: '1rem' },
+          display: 'flex',
+          justifyContent: 'center',
+          width: '100%'
+        }}>
+        {!isSearch && <Example />}
+      </Box>
+    </div>
+  );
+};
 
 export default Content;

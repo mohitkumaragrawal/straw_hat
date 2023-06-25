@@ -112,7 +112,52 @@ const Tickets = () => {
     return newMovieSeatDetails;
   };
 
+  const bookThisSeat=async (row,col)=>
+  {
+      console.log(row,col)
+      
+      //replace with actual data once everything is set
+      const bookingData = {
+        userId: 'user1',
+        movieId: 'movie1',
+        theaterId: 1,
+        row: 2,
+        column: 5,
+      };
+  
+      try {
+        const response = await fetch('/api/booking/newBooking', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(bookingData),
+        });
+    
+        if (!response.ok) {
+          throw new Error('Failed to create booking');
+        }
+    
+        const data = await response.json();
+        console.log('Booking created:', data);
+      } catch (error) {
+        console.error('Error creating booking:', error);
+      }
+  }
+
   const onConfirmButtonClick = async () => {
+
+    for (const row in seatDetails) {
+      for (let col = 0; col < seatDetails[row].length; col++) {
+        const seatValue = seatDetails[row][col];
+        // console.log(`Seat at row ${row}, column ${col}: ${seatValue}`);
+          if(seatValue==2)
+          {
+            bookThisSeat(row,col+1);
+          }
+      }
+    }
+    
     // let movieIndex = movies.findIndex(mov => mov.id === parseInt(movieId));
     let movieIndex = 1;
     // if (movieIndex !== -1 && setMovies) {

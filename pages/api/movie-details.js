@@ -23,6 +23,7 @@ export default async function (req, res) {
           text: [dataToSend]
         }
       }
-    ]
+    ],
+    fulfillmentText: dataToSend
   });
 }
