@@ -3,6 +3,10 @@ import { Button } from '@mui/material';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 // import MoviesContext from '../../context/MoviesContext';
 // import { Movie, Seats } from '../../constants/models/Movies';
@@ -16,6 +20,8 @@ const SeatsPage = () => {
   //   const movie = movies.find(mov => mov.id === parseInt(id));
   //   const [seatDetails, setSeatDetails] = useState(movie?.seats || {});
   const [movieId,setMovieId]=useState()
+  const [theatres,setTheatres]=useState([])
+  const [theaterId, setTheaterId] = useState('');
   const [seatDetails, setSeatDetails] = useState({
     A: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     B: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -34,7 +40,28 @@ const SeatsPage = () => {
   useEffect(()=>{
     const movie=localStorage.getItem('movieId')
     setMovieId(movie)
+
+    const getAllTheaters= async ()=>{
+      try {
+        const response = await fetch('/api/theatre/getTheatres');
+        if (!response.ok) {
+          throw new Error('Failed to fetch theatres');
+        }
+        const theatresData = await response.json();
+        console.log(theatresData);
+        setTheatres(theatresData)
+        
+      } catch (error) {
+        console.error('Error fetching theatres:', error);
+        throw error;
+      }
+    }
+    getAllTheaters();
+
   },[])
+
+  
+  
 
   const clearSelectedSeats = () => {
     let newMovieSeatDetails = { ...seatDetails };
@@ -104,6 +131,41 @@ const SeatsPage = () => {
     return <div className={styles.seatsLeafContainer}>{seatArray}</div>;
   };
 
+  const  SelectTheatre=()=> {
+    
+  
+    const handleChange = (event) => {
+      setTheaterId(event.target.value);
+
+    };
+  
+    return (
+      <div>
+        <FormControl variant="filled" sx={{ m: 1, minWidth: 200 }}>
+          <InputLabel id="select-theatre">Select Theatre</InputLabel>
+          <Select
+            labelId="select-theatre"
+            id={theaterId}
+            value={theaterId}
+            onChange={handleChange}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {
+              theatres.map((theatre)=>(
+                <MenuItem value={theatre.id}>{theatre.name}</MenuItem>
+              ))
+            }
+            
+            {/* <MenuItem value={10}>Theatre 1</MenuItem>
+            <MenuItem value={20}>Theatre 2</MenuItem>
+            <MenuItem value={30}>Theatre 3</MenuItem> */}
+          </Select>
+        </FormControl>
+      </div>
+    );
+  }
   const RenderPaymentButton = () => {
     selectedSeats = [];
     for (let key in seatDetails) {
@@ -113,11 +175,14 @@ const SeatsPage = () => {
         }
       });
     }
+    // console.log("length",selectedSeats.length)
     if (selectedSeats.length) {
       //console.log(seatDetails)
       //console.log((selectedSeats.length*200).toString())
     localStorage.setItem('cost',(selectedSeats.length*200).toString())
-    localStorage.setItem('seats',seatDetails)
+    localStorage.setItem('theaterId',theaterId)
+    localStorage.setItem('seats',JSON.stringify(seatDetails));
+    // console.log(JSON.parse(localStorage.getItem('seats')));
       return (
         // <Link href={{ pathname: '/payment', query: { movieId: movie?.id, seatDetails: JSON.stringify(seatDetails) } }}>
         <Link href="/payment">
@@ -145,6 +210,8 @@ const SeatsPage = () => {
       </Head>
       <div className={styles.seatsContainer}>
         <h1>{movieId}</h1>
+        {/* <p>theatre</p> */}
+        <SelectTheatre/>
         {seatDetails && <RenderSeats />}
         <RenderPaymentButton />
       </div>
