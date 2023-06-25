@@ -22,13 +22,14 @@ const Tickets = () => {
 
   //   const { movieId, seatDetails } = router.query;
   //   const movie = movies.find(mov => mov.id === parseInt(movieId));
-  const [movieId,setMovieId]=useState()
+  const [movieId,setMovieId]=useState('1')
   const [cost,setCost]=useState()
+  const [theaterId,setTheaterId]=useState();
   const [seatDetails, setSeatDetails] = useState({
     A: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     B: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     C: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    D: [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    D: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     E: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     F: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     G: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -42,12 +43,20 @@ const Tickets = () => {
     const movieId=localStorage.getItem('movieId')
     console.log(movieId)
     setMovieId(movieId)
+
+    const theaterId=localStorage.getItem('theaterId')
+    setTheaterId(theaterId)
+
     const cost=localStorage.getItem('cost')
     console.log(cost)
     setCost(cost)
-    /*const seats=localStorage.getItem('seats')
+
+    
+
+    const seats=JSON.parse(localStorage.getItem('seats'))
     console.log(seats)
-    setSeatDetails(seats)*/
+    setSeatDetails(seats)
+
     if (seconds > 0) {
       setTimeout(() => setSeconds(seconds - 1), 1000);
     } else {
@@ -115,16 +124,21 @@ const Tickets = () => {
   const bookThisSeat=async (row,col)=>
   {
       console.log(row,col)
-      
-      //replace with actual data once everything is set
+
+      const userDataString = localStorage.getItem('user');
+      const userData = JSON.parse(userDataString);
+      const userId = userData.user_id;
+      console.log(userId)
+
       const bookingData = {
-        userId: 'user1',
-        movieId: 'movie1',
-        theaterId: 1,
-        row: 2,
-        column: 5,
+        userId: userId,
+        movieId: movieId,
+        theaterId: theaterId,
+        row: row,
+        column: col,
       };
-  
+      
+      console.log(bookingData);
       try {
         const response = await fetch('/api/booking/newBooking', {
           method: 'POST',
@@ -153,7 +167,8 @@ const Tickets = () => {
         // console.log(`Seat at row ${row}, column ${col}: ${seatValue}`);
           if(seatValue==2)
           {
-            bookThisSeat(row,col+1);
+            console.log(`Seat at row ${row}, column ${col+1}: ${seatValue}`)
+            await bookThisSeat(row,col+1);
           }
       }
     }
