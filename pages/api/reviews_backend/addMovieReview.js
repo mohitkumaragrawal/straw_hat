@@ -10,13 +10,17 @@ const addMovieReview = async (req, res) => {
     //console.log(req);
 
     const { userId, movieId, rating, review } = req.body;
+    console.log(userId, movieId, rating, review);
 
-    const userExists = await prisma.movieReview.findMany({ where: { userId, movieId } });
+    const userExists =
+      await prisma.$queryRaw`Select * from "MovieReview" where "userId"=${userId} and "movieId"=${movieId}`;
 
     if (!userExists) {
-      const add = await prisma.movieReview.create({ data: { userId, movieId, rating, review } });
+      const add = await prisma.$queryRaw`Insert into "MovieReview" values (${userId},${movieId},${rating},${review})`;
+      console.log(add);
     } else {
-      const update = await prisma.movieReview.updateMany({ where: { userId, movieId }, data: { rating, review } });
+      const update =
+        await prisma.$queryRaw`update "MovieReview" set "rating"=${rating} and "review"=${review} where "userId"=${userId} and "movieId"=${movieId}`;
     }
     res.status(200).json({
       message: 'successfully added/updated movie review'
