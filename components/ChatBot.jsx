@@ -38,17 +38,24 @@ export default function ChatBot() {
           backgroundPosition: '0 0',
           backgroundSize: 'cover'
         }}
-        onClick={e => setOpen(true)}></div>
+        onClick={e => setOpen(!open)}></div>
 
-      {open && (
-        <div style={{ position: 'fixed', bottom: '20px', right: '20px' }}>
-          <iframe
-            width="350"
-            height="430"
-            allow="microphone;"
-            src="https://console.dialogflow.com/api-client/demo/embedded/c2d7655c-7266-4536-8d6e-f9643abe5cc7"></iframe>
-        </div>
-      )}
+      {/* {open && ( */}
+      <div
+        style={{
+          position: 'fixed',
+          bottom: '20px',
+          right: '20px',
+          boxShadow: '0 0  10px rgba(0, 0, 0, 0.5)',
+          visibility: open ? 'visible' : 'hidden'
+        }}>
+        <iframe
+          width="350"
+          height="430"
+          allow="microphone;"
+          src="https://console.dialogflow.com/api-client/demo/embedded/c2d7655c-7266-4536-8d6e-f9643abe5cc7"></iframe>
+      </div>
+      {/* )} */}
       {/* {open && (
         <div
           style={{
