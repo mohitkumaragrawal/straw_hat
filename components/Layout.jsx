@@ -19,7 +19,8 @@ const Layout = ({ children }) => (
     </Head>
     <main>
       <NavBar />
-      <Container> {children}</Container>
+      {/* <Container> {children}</Container> */}
+      {children}
 
       <ChatBot />
     </main>
