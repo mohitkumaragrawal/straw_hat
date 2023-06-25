@@ -27,7 +27,7 @@ export default function ChatBot() {
           position: 'fixed',
           bottom: '20px',
           right: '20px',
-          zIndex: '1000',
+          zIndex: '10004',
           borderRadius: '1000px',
           width: '70px',
           height: '70px',
@@ -44,10 +44,11 @@ export default function ChatBot() {
       <div
         style={{
           position: 'fixed',
-          bottom: '20px',
+          bottom: '100px',
           right: '20px',
           boxShadow: '0 0  10px rgba(0, 0, 0, 0.5)',
-          visibility: open ? 'visible' : 'hidden'
+          visibility: open ? 'visible' : 'hidden',
+          zIndex: '10003'
         }}>
         <iframe
           width="350"

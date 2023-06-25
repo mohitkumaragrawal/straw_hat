@@ -4,12 +4,10 @@ import { useRouter } from 'next/router';
 import { Button } from '@mui/material';
 import Link from 'next/link';
 
-// import { Movie, Seats } from '../../constants/models/Movies';
+import { useUser } from '@auth0/nextjs-auth0/client';
 import styles from './Payment.module.css';
-// import MoviesContext from '../../context/MoviesContext';
 
 const Tickets = () => {
-  //   const { movies, setMovies } = useContext(MoviesContext);
   const router = useRouter();
   const [seconds, setSeconds] = useState(5);
   const [isTimerCompleted, setIsTimerCompleted] = useState(false);
@@ -18,13 +16,9 @@ const Tickets = () => {
     ticketCost,
     bookingFee,
     totalCost;
-  //   let bookingChargePerTicket = 200;
-
-  //   const { movieId, seatDetails } = router.query;
-  //   const movie = movies.find(mov => mov.id === parseInt(movieId));
-  const [movieId,setMovieId]=useState('1')
-  const [cost,setCost]=useState()
-  const [theaterId,setTheaterId]=useState();
+  const [movieId, setMovieId] = useState('1');
+  const [cost, setCost] = useState();
+  const [theaterId, setTheaterId] = useState();
   const [seatDetails, setSeatDetails] = useState({
     A: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     B: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -40,29 +34,27 @@ const Tickets = () => {
   }
 
   useEffect(() => {
-    const movieId=localStorage.getItem('movieId')
-    console.log(movieId)
-    setMovieId(movieId)
+    const movieId = localStorage.getItem('movieId');
+    console.log(movieId);
+    setMovieId(movieId);
 
-    const theaterId=localStorage.getItem('theaterId')
-    setTheaterId(theaterId)
+    const theaterId = localStorage.getItem('theaterId');
+    setTheaterId(theaterId);
 
-    const cost=localStorage.getItem('cost')
-    console.log(cost)
-    setCost(cost)
+    const cost = localStorage.getItem('cost');
+    console.log(cost);
+    setCost(cost);
 
-    
-
-    const seats=JSON.parse(localStorage.getItem('seats'))
-    console.log(seats)
-    setSeatDetails(seats)
+    const seats = JSON.parse(localStorage.getItem('seats'));
+    console.log(seats);
+    setSeatDetails(seats);
 
     if (seconds > 0) {
       setTimeout(() => setSeconds(seconds - 1), 1000);
     } else {
       setIsTimerCompleted(true);
     }
-  },[]);
+  }, []);
 
   const computeSelectedSeats = () => {
     let selectedSeats = [];
@@ -121,58 +113,66 @@ const Tickets = () => {
     return newMovieSeatDetails;
   };
 
-  const bookThisSeat=async (row,col)=>
-  {
-      console.log(row,col)
+  const { user, isLoading } = useUser();
 
-      const userDataString = localStorage.getItem('user');
-      const userData = JSON.parse(userDataString);
-      const userId = userData.user_id;
-      console.log(userId)
+  const bookThisSeat = async (row, col) => {
+    console.log(row, col);
 
-      const bookingData = {
-        userId: userId,
-        movieId: movieId,
-        theaterId: theaterId,
-        row: row,
-        column: col,
-      };
-      
-      console.log(bookingData);
-      try {
-        const response = await fetch('/api/booking/newBooking', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(bookingData),
-        });
-    
-        if (!response.ok) {
-          throw new Error('Failed to create booking');
-        }
-    
-        const data = await response.json();
-        console.log('Booking created:', data);
-      } catch (error) {
-        console.error('Error creating booking:', error);
+    let rowNum = row.charCodeAt(0) - 'A'.charCodeAt(0) + 1;
+
+    // const userDataString = localStorage.getItem('user');
+    // const userData = JSON.parse(userDataString);
+    // const userId = userData.user_id;
+    // console.log(userId);
+
+    if (isLoading) {
+      alert('You are not logged in');
+      return;
+    }
+
+    const userId = user.sub;
+
+    const bookingData = {
+      userId: userId,
+      movieId: movieId ? movieId : '',
+      theaterId: theaterId,
+      row: rowNum,
+      column: +col
+    };
+
+    console.log(bookingData);
+    try {
+      const response = await fetch('/api/booking/newBooking', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(bookingData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create booking');
       }
-  }
+
+      const data = await response.json();
+      console.log('Booking created:', data);
+    } catch (error) {
+      console.error('Error creating booking:', error);
+    }
+  };
 
   const onConfirmButtonClick = async () => {
-
     for (const row in seatDetails) {
       for (let col = 0; col < seatDetails[row].length; col++) {
         const seatValue = seatDetails[row][col];
         // console.log(`Seat at row ${row}, column ${col}: ${seatValue}`);
-          if(seatValue==2)
-          {
-            console.log(`Seat at row ${row}, column ${col+1}: ${seatValue}`)
-            await bookThisSeat(row,col+1);
-          }
+        if (seatValue == 2) {
+          console.log(`Seat at row ${row}, column ${col + 1}: ${seatValue}`);
+          await bookThisSeat(row, col + 1);
+        }
       }
     }
-    
+
     // let movieIndex = movies.findIndex(mov => mov.id === parseInt(movieId));
     let movieIndex = 1;
     // if (movieIndex !== -1 && setMovies) {
@@ -199,7 +199,6 @@ const Tickets = () => {
   };
 
   const RenderCard = () => {
-    
     let selectedSeats = computeSelectedSeats();
     // let selectedSeats = 10;
 

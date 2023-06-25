@@ -19,8 +19,8 @@ const SeatsPage = () => {
   //   const { id, seats } = router.query;
   //   const movie = movies.find(mov => mov.id === parseInt(id));
   //   const [seatDetails, setSeatDetails] = useState(movie?.seats || {});
-  const [movieId,setMovieId]=useState()
-  const [theatres,setTheatres]=useState([])
+  const [movieId, setMovieId] = useState();
+  const [theatres, setTheatres] = useState([]);
   const [theaterId, setTheaterId] = useState('');
   const [seatDetails, setSeatDetails] = useState({
     A: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -37,11 +37,11 @@ const SeatsPage = () => {
   //       clearSelectedSeats();
   //     }
   //   }, []);
-  useEffect(()=>{
-    const movie=localStorage.getItem('movieId')
-    setMovieId(movie)
+  useEffect(() => {
+    const movie = localStorage.getItem('movieId');
+    setMovieId(movie);
 
-    const getAllTheaters= async ()=>{
+    const getAllTheaters = async () => {
       try {
         const response = await fetch('/api/theatre/getTheatres');
         if (!response.ok) {
@@ -49,19 +49,14 @@ const SeatsPage = () => {
         }
         const theatresData = await response.json();
         console.log(theatresData);
-        setTheatres(theatresData)
-        
+        setTheatres(theatresData);
       } catch (error) {
         console.error('Error fetching theatres:', error);
         throw error;
       }
-    }
+    };
     getAllTheaters();
-
-  },[])
-
-  
-  
+  }, []);
 
   const clearSelectedSeats = () => {
     let newMovieSeatDetails = { ...seatDetails };
@@ -76,7 +71,7 @@ const SeatsPage = () => {
   };
 
   const onSeatClick = (seatValue, rowIndex, key) => {
-    console.log(seatValue,rowIndex,key)
+    console.log(seatValue, rowIndex, key);
     if (seatDetails) {
       if (seatValue === 1 || seatValue === 3) {
         return;
@@ -131,14 +126,11 @@ const SeatsPage = () => {
     return <div className={styles.seatsLeafContainer}>{seatArray}</div>;
   };
 
-  const  SelectTheatre=()=> {
-    
-  
-    const handleChange = (event) => {
+  const SelectTheatre = () => {
+    const handleChange = event => {
       setTheaterId(event.target.value);
-
     };
-  
+
     return (
       <div>
         <FormControl variant="filled" sx={{ m: 1, minWidth: 200 }}>
@@ -148,16 +140,16 @@ const SeatsPage = () => {
             id={theaterId}
             value={theaterId}
             onChange={handleChange}
-          >
+            sx={{
+              my: 5
+            }}>
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            {
-              theatres.map((theatre)=>(
-                <MenuItem value={theatre.id}>{theatre.name}</MenuItem>
-              ))
-            }
-            
+            {theatres.map(theatre => (
+              <MenuItem value={theatre.id}>{theatre.name}</MenuItem>
+            ))}
+
             {/* <MenuItem value={10}>Theatre 1</MenuItem>
             <MenuItem value={20}>Theatre 2</MenuItem>
             <MenuItem value={30}>Theatre 3</MenuItem> */}
@@ -165,7 +157,7 @@ const SeatsPage = () => {
         </FormControl>
       </div>
     );
-  }
+  };
   const RenderPaymentButton = () => {
     selectedSeats = [];
     for (let key in seatDetails) {
@@ -179,10 +171,10 @@ const SeatsPage = () => {
     if (selectedSeats.length) {
       //console.log(seatDetails)
       //console.log((selectedSeats.length*200).toString())
-    localStorage.setItem('cost',(selectedSeats.length*200).toString())
-    localStorage.setItem('theaterId',theaterId)
-    localStorage.setItem('seats',JSON.stringify(seatDetails));
-    // console.log(JSON.parse(localStorage.getItem('seats')));
+      localStorage.setItem('cost', (selectedSeats.length * 200).toString());
+      localStorage.setItem('theaterId', theaterId);
+      localStorage.setItem('seats', JSON.stringify(seatDetails));
+      // console.log(JSON.parse(localStorage.getItem('seats')));
       return (
         // <Link href={{ pathname: '/payment', query: { movieId: movie?.id, seatDetails: JSON.stringify(seatDetails) } }}>
         <Link href="/payment">
@@ -199,10 +191,8 @@ const SeatsPage = () => {
     }
   };
 
-  
-
   //   if (!movie) return <div>loading...</div>;
-  
+
   return (
     <>
       <Head>
@@ -211,7 +201,7 @@ const SeatsPage = () => {
       <div className={styles.seatsContainer}>
         <h1>{movieId}</h1>
         {/* <p>theatre</p> */}
-        <SelectTheatre/>
+        <SelectTheatre />
         {seatDetails && <RenderSeats />}
         <RenderPaymentButton />
       </div>
