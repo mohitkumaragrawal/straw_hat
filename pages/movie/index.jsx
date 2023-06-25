@@ -8,6 +8,8 @@ import styles from './showmovie.module.css';
 import { Button, Input, Rating, Typography } from '@mui/material';
 // import Carousels from '../../components/carousel';
 
+import { useRouter } from 'next/router';
+
 const Movie = props => {
   //   const state = {
   //     name: '',
@@ -43,66 +45,72 @@ const Movie = props => {
   //     }
   //   }, []);
 
-  const id=7
-  const [movie,setMovie]=useState({genres:[],image:{}})
-  const [rating,setRating]=useState()
-  const [reviews,setReviews]=useState([])
-  const [userRating,setUserRating]=useState(0)
-  const [userReview,setUserReview]=useState("")
+  const router = useRouter();
 
-  async function loadData(){
-    let data=await fetch(`https://api.tvmaze.com/shows/${id}`,{method:'get'})
-    data=await data.json()
-    console.log(data)
-    setMovie(data)
+  const id = router.query.id;
+  const [movie, setMovie] = useState({ genres: [], image: {} });
+  const [rating, setRating] = useState();
+  const [reviews, setReviews] = useState([]);
+  const [userRating, setUserRating] = useState(0);
+  const [userReview, setUserReview] = useState('');
 
-    let rating=await fetch(`http://localhost:3000/api/computeRatings`,{
-      method:'post',
-      body:JSON.stringify({id}),
-      headers:{
-        'Content-Type':'application/json'
+  async function loadData() {
+    let data = await fetch(`https://api.tvmaze.com/shows/${id}`, { method: 'get' });
+    data = await data.json();
+    console.log(data);
+    setMovie(data);
+
+    let rating = await fetch(`http://localhost:3000/api/computeRatings`, {
+      method: 'post',
+      body: JSON.stringify({ id }),
+      headers: {
+        'Content-Type': 'application/json'
       }
-    })
-    rating =await rating.json()
-    console.log(rating.ratings[0].avg)
-    setRating(rating.ratings[0].avg)
+    });
+    rating = await rating.json();
+    console.log(rating.ratings[0].avg);
+    setRating(rating.ratings[0].avg);
 
-    let reviews=await fetch('http://localhost:3000/api/getReviews',{
-      method:'post',
-      body:JSON.stringify({id}),
-      headers:{
-        'Content-Type':'application/json'
+    let reviews = await fetch('http://localhost:3000/api/getReviews', {
+      method: 'post',
+      body: JSON.stringify({ id }),
+      headers: {
+        'Content-Type': 'application/json'
       }
-    })
-    reviews=await reviews.json()
-    console.log(reviews.reviews)
-    setReviews(reviews.reviews)
-
-
+    });
+    reviews = await reviews.json();
+    console.log(reviews.reviews);
+    setReviews(reviews.reviews);
   }
 
-  useEffect(()=>{
-    loadData()
-  },[])
+  useEffect(() => {
+    loadData();
+  }, []);
 
-  const userId=3
-  async function handleSubmit(){
-    console.log(userRating,userReview)
-    let result=await fetch('http://localhost:3000/api/reviews_backend/addMovieReview',{
-      method:'post',
-      body:JSON.stringify({userId,movieId:id,rating:userRating,review:userReview}),
-      headers:{
-        'Content-Type':'application/json'
+  const userId = 3;
+  async function handleSubmit() {
+    console.log(userRating, userReview);
+    let result = await fetch('http://localhost:3000/api/reviews_backend/addMovieReview', {
+      method: 'post',
+      body: JSON.stringify({ userId, movieId: id, rating: userRating, review: userReview }),
+      headers: {
+        'Content-Type': 'application/json'
       }
-    })
-    result=await result.json()
-    if(result) alert("successfully added rating and review")
+    });
+    result = await result.json();
+    if (result) alert('successfully added rating and review');
   }
 
   return (
-    <div className={styles.container} style={{height:'100%'}}>
+    <div className={styles.container} style={{ height: '100%' }}>
       <div className={styles.main_cont}>
-        <div className={styles.poster_cont} style={{backgroundImage:`url(${movie.image.medium})`, backgroundSize:'cover',backgroundPosition:'center'}}>
+        <div
+          className={styles.poster_cont}
+          style={{
+            backgroundImage: `url(${movie.image.medium})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}>
           {/* <img className={styles.poster} src={movie.images[0]} alt="poster" id="poster" /> */}
           {/*<img
             className={styles.poster}
@@ -133,7 +141,6 @@ const Movie = props => {
                 }}>
                 {movie.summary}
               </Typography>
-
             </div>
             <div className={styles.tag}>
               <ul className={styles.ul}>
@@ -142,7 +149,7 @@ const Movie = props => {
                     <span>{tag}</span>
                   </li>
                 ))} */}
-                {movie.genres.map(item=>(
+                {movie.genres.map(item => (
                   <li>{`  ${item} `}</li>
                 ))}
               </ul>
@@ -174,13 +181,13 @@ const Movie = props => {
               </ul>
             </div>*/}
             <div className={styles.rating}>
-              {<p id="rating">❤️ {rating}/10</p> }
+              {<p id="rating">❤️ {rating}/10</p>}
               <Typography
                 variant="p"
                 style={{
                   fontSize: '1rem'
                 }}>
-                ❤️ 
+                ❤️
               </Typography>
             </div>
             <div className={styles.duration}>
@@ -198,18 +205,17 @@ const Movie = props => {
               {/* <p id="release">{movie.release}</p> */}
               <p id="release">{movie.premiered}</p>
             </div>
-
             <div>
               <ul>
-                {reviews.map(item=>(
+                {reviews.map(item => (
                   <li>{item}</li>
                 ))}
               </ul>
             </div>
-
-            <Rating sx={{fontSize:'40px'}} onChange={e=>setUserRating(e.target.value)}></Rating><br></br>
+            <Rating sx={{ fontSize: '40px' }} onChange={e => setUserRating(e.target.value)}></Rating>
+            <br></br>
             Write a review<br></br>
-            <Input onChange={e=>setUserReview(e.target.value)}></Input>
+            <Input onChange={e => setUserReview(e.target.value)}></Input>
             <Button onClick={handleSubmit}>Submit review</Button>
           </div>
         </div>

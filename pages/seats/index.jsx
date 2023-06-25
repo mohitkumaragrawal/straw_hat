@@ -16,9 +16,6 @@ const SeatsPage = () => {
   //   const { movies } = useContext(MoviesContext);
   const router = useRouter();
   let selectedSeats = [];
-  //   const { id, seats } = router.query;
-  //   const movie = movies.find(mov => mov.id === parseInt(id));
-  //   const [seatDetails, setSeatDetails] = useState(movie?.seats || {});
   const [movieId, setMovieId] = useState();
   const [theatres, setTheatres] = useState([]);
   const [theaterId, setTheaterId] = useState('');
@@ -26,7 +23,7 @@ const SeatsPage = () => {
     A: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     B: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     C: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    D: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    D: [0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     E: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     F: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     G: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]

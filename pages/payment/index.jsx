@@ -135,7 +135,7 @@ const Tickets = () => {
     const bookingData = {
       userId: userId,
       movieId: movieId ? movieId : '',
-      theaterId: theaterId,
+      theaterId: +theaterId,
       row: rowNum,
       column: +col
     };
