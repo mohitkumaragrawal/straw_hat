@@ -12,7 +12,7 @@ const Hero = () => {
   const [toggle, setToggle] = useState(false);
 
   async function renderMovies() {
-    let l = await fetch('http://localhost:3001/api/showMovies', {
+    let l = await fetch('/api/showMovies', {
       method: 'get'
     });
     setMovies(l.message);
@@ -34,7 +34,7 @@ const Hero = () => {
   }
 
   return (
-    <Button>
+    <Box>
       <h1 className="mb-4" data-testid="hero-title">
         Recommended Movies
       </h1>
@@ -45,7 +45,7 @@ const Hero = () => {
           {movies && movies.map(item => <Card1 MovieName={item.movieName} Rating={item.rating} />)}
         </Grid>
       </Box>
-    </Button>
+    </Box>
   );
 };
 
