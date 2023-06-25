@@ -91,7 +91,7 @@ const Hero = () => {
                   }}
                 />
 
-                <Box sx={{ position: 'absolute', zIndex: '10000', color: 'red', bottom: 0 }}>
+                <Box sx={{ position: 'absolute', zIndex: '10000', color: 'white', bottom: 0 }}>
                   <Typography variant="h5" sx={{ textShadow: '0 0 5px black' }}>
                     {item.show.name}
                   </Typography>
