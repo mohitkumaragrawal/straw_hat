@@ -16,6 +16,7 @@ const audience = process.env.AUTH0_AUDIENCE;
 const reviewRouter = require('./pages/api/reviews_backend/reviewRouter');
 const theatreReviewRouter = require('./pages/api/theatre_reviews/theatreReviewRouter');
 const showMovies = require('./pages/api/showMovies');
+const computeRatings = require('./pages/api/computeRatings');
 
 if (!baseUrl || !issuerBaseUrl) {
   throw new Error('Please make sure that the file .env.local is in place and populated');
@@ -51,6 +52,7 @@ app.get('/api/shows', checkJwt, (req, res) => {
 app.use('/api/movieReview', reviewRouter);
 app.use('/api/theaterReview', theatreReviewRouter);
 app.get('/api/showMovies', showMovies);
+app.post('/api/computeRatings', computeRatings);
 
 const server = app.listen(port, () => console.log(`API Server listening on port ${port}`));
 process.on('SIGINT', () => server.close());
