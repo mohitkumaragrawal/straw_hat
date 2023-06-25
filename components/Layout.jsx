@@ -5,6 +5,7 @@ import Head from 'next/head';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import { Container } from 'reactstrap';
+import ChatBot from './ChatBot';
 
 const Layout = ({ children }) => (
   <>
@@ -19,6 +20,8 @@ const Layout = ({ children }) => (
     <main>
       <NavBar />
       <Container> {children}</Container>
+
+      <ChatBot />
     </main>
   </>
 );
