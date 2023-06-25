@@ -16,6 +16,8 @@ import AnchorLink from './AnchorLink';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { Avatar, Button } from '@mui/material';
 
+import authUser from '../auth-users.json';
+
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -83,6 +85,8 @@ export default function NavBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const isAdmin = !isLoading && user && authUser.includes(user.sub);
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -99,7 +103,7 @@ export default function NavBar() {
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}>
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>{isAdmin ? 'Admin' : 'Profile'}</MenuItem>
 
       <MenuItem href="/api/auth/logout" onClick={handleMenuClose}>
         <AnchorLink href="/api/auth/logout" className="btn btn-link p-0" icon="power-off" testId="navbar-logout-mobile">
@@ -113,6 +117,15 @@ export default function NavBar() {
           </AnchorLink>
         </Typography>
       </MenuItem>
+      {isAdmin && (
+        <MenuItem onClick={handleMenuClose}>
+          <Typography>
+            <AnchorLink href="/add-theatre" className="btn btn-link " icon="user" testId="navbar-logout-mobile">
+              Create Theatre
+            </AnchorLink>
+          </Typography>
+        </MenuItem>
+      )}
     </Menu>
   );
 
