@@ -1,3 +1,31 @@
+
+# Straw Hat
+An intuitive movie booking and exploration application for streamlined ticket reservations and enhanced movie discovery.
+
+## Tool and Technologies used
+- Next js
+- Node.js
+- Auth0
+- prisma
+- Material UI
+## Features
+- User-centric home page, engineered detailed movie pages, and a **real time seat matrix**, enabling theater selection, and simultaneous booking of multiple seats
+- Interactive **chatbot** on the home page, providing users with personalized guidance and assistance
+- Authentication and authorization using auth0
+## Screenshots
+
+![Screenshot 2024-01-22 233134](https://github.com/mohitkumaragrawal/straw_hat/assets/90411262/ace81b43-86fc-427c-aa69-9737873f65fb)
+
+## Interactive Chatbot
+![Screenshot 2024-01-22 233251](https://github.com/mohitkumaragrawal/straw_hat/assets/90411262/e9be5ad2-a289-42e6-8ba7-e6fb42b14dba)
+
+## Realtime seat matrix and booking
+![Screenshot 2024-01-22 233208](https://github.com/mohitkumaragrawal/straw_hat/assets/90411262/55cdda9e-a724-4488-94d7-7cf1bdf61b50)
+
+## Authentication And Authorization
+![Screenshot 2024-01-22 233331](https://github.com/mohitkumaragrawal/straw_hat/assets/90411262/129d0391-85b9-4dd5-a51a-cae5bbcd41a1)
+
+
 # Auth0 Next.js SDK Sample Application
 
 This sample demonstrates the integration of [Auth0 Next.js SDK](https://github.com/auth0/nextjs-auth0) into a Next.js application created using [create-next-app](https://nextjs.org/docs/api-reference/create-next-app). The sample is a companion to the [Auth0 Next.js SDK Quickstart](https://auth0.com/docs/quickstart/webapp/nextjs).
